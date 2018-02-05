@@ -1,0 +1,132 @@
+---
+title: "Data607_HW1_Mushroom"
+author: "Ritesh Lohiya"
+date: "February 4, 2018"
+output: html_document
+---
+
+```{r library-Rcurl, eval=TRUE}
+library(RCurl)
+```
+
+```{r library-ggplot2, eval=TRUE}
+library(ggplot2)
+```
+
+Get the data from UCI:
+
+```{r load-Mashroom-data, eval=TRUE}
+Mushroom <-read.csv("https://archive.ics.uci.edu/ml/machine-learning-databases/mushroom/agaricus-lepiota.data", header= FALSE, sep=",")
+```
+
+Dimensions of Mashroom:
+
+```{r dim-data, eval=TRUE}
+dim(Mushroom)
+```
+
+Summary of Mashroom:
+
+```{r summary-data, eval=TRUE}
+summary(Mushroom)
+```
+
+Selecting the required data(classes, cap-shape, cap-color, odor, population, habitat:
+
+```{r select-data, eval=TRUE}
+Mushroom_data <- Mushroom[,c(1,2,4,6,22,23)]
+```
+
+
+Summary of Mashroom_data:
+
+```{r summary-Mushroomdata, eval=TRUE}
+summary(Mushroom_data)
+```
+
+Adding meaningful names to the columns:
+
+```{r Cloumn-name-Mushroomdata, eval=TRUE}
+Mushroom_d <- Mushroom[,c(1,2,4,6,22,23)]
+
+colnames(Mushroom_d) <- c("classes","cap_shape","cap_color","odor", "population", "habitat")
+
+levels(Mushroom_d$classes)[levels(Mushroom_d$classes)=="e"] <- "Edible"
+levels(Mushroom_d$classes)[levels(Mushroom_d$classes)=="p"] <- "Poisonous"
+
+levels(Mushroom_d$cap_shape)[levels(Mushroom_d$cap_shape)=="b"] <- "bell"
+levels(Mushroom_d$cap_shape)[levels(Mushroom_d$cap_shape)=="c"] <- "conical"
+levels(Mushroom_d$cap_shape)[levels(Mushroom_d$cap_shape)=="x"] <- "convex"
+levels(Mushroom_d$cap_shape)[levels(Mushroom_d$cap_shape)=="f"] <- "flat"
+levels(Mushroom_d$cap_shape)[levels(Mushroom_d$cap_shape)=="k"] <- "knobbed"
+levels(Mushroom_d$cap_shape)[levels(Mushroom_d$cap_shape)=="s"] <- "sunken"
+
+levels(Mushroom_d$cap_color)[levels(Mushroom_d$cap_color)=="n"] <- "brown"
+levels(Mushroom_d$cap_color)[levels(Mushroom_d$cap_color)=="b"] <- "buff"
+levels(Mushroom_d$cap_color)[levels(Mushroom_d$cap_color)=="c"] <- "cinnamon"
+levels(Mushroom_d$cap_color)[levels(Mushroom_d$cap_color)=="g"] <- "gray"
+levels(Mushroom_d$cap_color)[levels(Mushroom_d$cap_color)=="r"] <- "green"
+levels(Mushroom_d$cap_color)[levels(Mushroom_d$cap_color)=="p"] <- "pink"
+levels(Mushroom_d$cap_color)[levels(Mushroom_d$cap_color)=="u"] <- "purple"
+levels(Mushroom_d$cap_color)[levels(Mushroom_d$cap_color)=="e"] <- "red"
+levels(Mushroom_d$cap_color)[levels(Mushroom_d$cap_color)=="w"] <- "white"
+levels(Mushroom_d$cap_color)[levels(Mushroom_d$cap_color)=="y"] <- "yellow"
+
+levels(Mushroom_d$odor)[levels(Mushroom_d$odor)=="a"] <- "almond"
+levels(Mushroom_d$odor)[levels(Mushroom_d$odor)=="l"] <- "anise"
+levels(Mushroom_d$odor)[levels(Mushroom_d$odor)=="c"] <- "creosote"
+levels(Mushroom_d$odor)[levels(Mushroom_d$odor)=="y"] <- "fishy"
+levels(Mushroom_d$odor)[levels(Mushroom_d$odor)=="f"] <- "foul"
+levels(Mushroom_d$odor)[levels(Mushroom_d$odor)=="m"] <- "musty"
+levels(Mushroom_d$odor)[levels(Mushroom_d$odor)=="n"] <- "none"
+levels(Mushroom_d$odor)[levels(Mushroom_d$odor)=="p"] <- "pungent"
+levels(Mushroom_d$odor)[levels(Mushroom_d$odor)=="s"] <- "spicy"
+
+levels(Mushroom_d$population)[levels(Mushroom_d$population)=="a"] <- "abundant"
+levels(Mushroom_d$population)[levels(Mushroom_d$population)=="c"] <- "clustered"
+levels(Mushroom_d$population)[levels(Mushroom_d$population)=="n"] <- "numerous"
+levels(Mushroom_d$population)[levels(Mushroom_d$population)=="s"] <- "scattered"
+levels(Mushroom_d$population)[levels(Mushroom_d$population)=="v"] <- "several"
+levels(Mushroom_d$population)[levels(Mushroom_d$population)=="y"] <- "solitary"
+
+levels(Mushroom_d$habitat)[levels(Mushroom_d$habitat)=="g"] <- "grasses"
+levels(Mushroom_d$habitat)[levels(Mushroom_d$habitat)=="l"] <- "leaves"
+levels(Mushroom_d$habitat)[levels(Mushroom_d$habitat)=="m"] <- "meadows"
+levels(Mushroom_d$habitat)[levels(Mushroom_d$habitat)=="p"] <- "paths"
+levels(Mushroom_d$habitat)[levels(Mushroom_d$habitat)=="u"] <- "urban"
+levels(Mushroom_d$habitat)[levels(Mushroom_d$habitat)=="w"] <- "waste"
+levels(Mushroom_d$habitat)[levels(Mushroom_d$habitat)=="d"] <- "woods"
+
+head(Mushroom_d)
+
+```
+
+Summary of Mashroom_data after renaming:
+
+```{r summary-rename-Mushroomdata, eval=TRUE}
+summary(Mushroom_d)
+```
+
+Plot population distribution:
+
+
+```{r plot-Mushroomdata, eval=TRUE}
+qplot(population, data = Mushroom_d, fill= classes)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
